@@ -69,15 +69,23 @@ fn main() -> AOCResult<()>{
 		if let Some(pair) = compute_nice_pair(&numbers, 2020) {
 			eprintln!("Result for AoC task 1: {} ", pair.0 * pair.1);
 		}
+		else {
+			eprintln!("Couldn't find a pair adding up to 2020.");
+			std::process::exit(1)
+		}
 
 		if let Some(triplet) = compute_nice_triplet(&numbers, 2020) {
 			eprintln!("Result for AoC task 1 part 2: {} ", triplet.0 * triplet.1 * triplet.2);
+		}
+		else {
+			eprintln!("Couldn't find three items adding up to 2020.");
+			std::process::exit(1)
 		}
 
 		Ok(())
 	}
 	else {
 		eprintln!("Pass input file as an argument.");
-		Ok(())
+		std::process::exit(1)
 	}
 }
