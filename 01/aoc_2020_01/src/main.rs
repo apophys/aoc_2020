@@ -22,7 +22,7 @@ fn load_numbers(filename: &str) -> AOCResult<Vec<i32>> {
 	Ok(numbers)
 }
 
-fn compute_nice_pair(numbers_list: &Vec<i32>, expected_sum: i32) -> Option<(i32, i32)> {
+fn compute_nice_pair(numbers_list: &[i32], expected_sum: i32) -> Option<(i32, i32)> {
 	let mut counter: usize = 0;
 
 	while counter < numbers_list.len() {
@@ -39,7 +39,7 @@ fn compute_nice_pair(numbers_list: &Vec<i32>, expected_sum: i32) -> Option<(i32,
 
 }
 
-fn compute_nice_triplet(numbers_list: &Vec<i32>, expected_sum: i32) -> Option<(i32, i32, i32)> {
+fn compute_nice_triplet(numbers_list: &[i32], expected_sum: i32) -> Option<(i32, i32, i32)> {
 	let mut counter: usize = 0;
 	while counter < numbers_list.len() {
 		let current = numbers_list[counter];
@@ -63,7 +63,7 @@ fn compute_nice_triplet(numbers_list: &Vec<i32>, expected_sum: i32) -> Option<(i
 }
 
 fn main() -> AOCResult<()>{
-	if let Some(filename) = env::args().skip(1).next() {
+	if let Some(filename) = env::args().nth(1) {
 		let numbers = load_numbers(&filename)?;
 
 		if let Some(pair) = compute_nice_pair(&numbers, 2020) {
