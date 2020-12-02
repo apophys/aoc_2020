@@ -14,11 +14,9 @@ fn load_numbers(filename: &str) -> AOCResult<Vec<i32>> {
 	file.read_to_string(&mut content)?;
 
 	let mut numbers = Vec::new();
-
 	for line in content.lines() {
 		numbers.push(line.parse()?)
 	}
-
 	Ok(numbers)
 }
 
@@ -36,7 +34,6 @@ fn compute_nice_pair(numbers_list: &[i32], expected_sum: i32) -> Option<(i32, i3
 		counter+=1;
 	}
 	None
-
 }
 
 fn compute_nice_triplet(numbers_list: &[i32], expected_sum: i32) -> Option<(i32, i32, i32)> {
@@ -53,7 +50,6 @@ fn compute_nice_triplet(numbers_list: &[i32], expected_sum: i32) -> Option<(i32,
 					eprintln!("Found three values adding up to {}: {} + {} + {}", expected_sum, i, inner_value, current);
 					return Some((current, inner_value, *i))
 				}
-
 			}
 			inner_counter += 1;
 		}
