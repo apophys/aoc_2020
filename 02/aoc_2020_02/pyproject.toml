@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "aoc_2020_02"
+version = "0.1.0"
+description = ""
+authors = ["Milan Kubík <email@kubikmilan.sk>"]
+packages = [
+	{ include = "main.py" }
+]
+
+[tool.poetry.scripts]
+aoc-02-cli = "main:main"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
