@@ -18,7 +18,7 @@ impl Error for ParseMapRowError {}
 impl fmt::Display for ParseMapRowError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            ParseMapRowError::InvalidCharacter(message) => write!(f, "{}", message),
+            Self::InvalidCharacter(message) => write!(f, "{}", message),
         }
     }
 }
@@ -55,7 +55,7 @@ impl FromStr for MapRow {
                 '.' => row.push(false),
                 '#' => row.push(true),
                 _ => {
-                    return Err(ParseMapRowError::InvalidCharacter(format!(
+                    return Err(Self::Err::InvalidCharacter(format!(
                         "Found invalid character {}",
                         character
                     )))
@@ -71,7 +71,6 @@ impl FromStr for Map {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let map: Result<_, _> = s.lines().map(str::parse).collect();
-
         Ok(Map(map?))
     }
 }
@@ -81,7 +80,6 @@ impl MapRow {
         self.0[index % self.0.len()]
     }
 }
-
 
 impl<'a> IntoIterator for &'a Map {
     type Item = &'a MapRow;
