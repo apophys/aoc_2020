@@ -70,13 +70,9 @@ impl FromStr for Map {
     type Err = ParseMapError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let mut map: Vec<MapRow> = Vec::new();
+        let map: Result<_, _> = s.lines().map(str::parse).collect();
 
-        for line in s.lines() {
-            map.push(line.parse()?);
-        }
-
-        Ok(Map(map))
+        Ok(Map(map?))
     }
 }
 
