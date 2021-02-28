@@ -34,7 +34,7 @@ fn main() -> std::io::Result<()> {
 
         file.read_to_string(&mut file_content)?;
 
-        let rule_list = vec![
+        let rule_list = [
             SlopeTraversal { right: 1, down: 1 },
             SlopeTraversal { right: 3, down: 1 },
             SlopeTraversal { right: 5, down: 1 },
@@ -49,10 +49,9 @@ fn main() -> std::io::Result<()> {
                     count_toboggan_trees(&toboggan_map, SlopeTraversal { right: 3, down: 1 })
                 );
 
-                let mut task2_result = 1;
-                for ruleset in rule_list {
-                    task2_result *= count_toboggan_trees(&toboggan_map, ruleset);
-                }
+                let task2_result = rule_list.iter().fold(1, |acc, rule| {
+                    acc * count_toboggan_trees(&toboggan_map, *rule)
+                });
                 println!("Task 2: {}", task2_result);
             }
             Err(error) => {
