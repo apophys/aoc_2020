@@ -12,7 +12,7 @@ struct SlopeTraversal {
     down: usize,
 }
 
-fn count_toboggan_trees(map: Map, rules: SlopeTraversal) -> usize {
+fn count_toboggan_trees(map: &Map, rules: SlopeTraversal) -> usize {
     let mut slope_index = 0;
     let mut tree_count = 0;
 
@@ -24,7 +24,6 @@ fn count_toboggan_trees(map: Map, rules: SlopeTraversal) -> usize {
             slope_index += rules.right;
         }
     }
-
     tree_count
 }
 
@@ -47,12 +46,12 @@ fn main() -> std::io::Result<()> {
             Ok(toboggan_map) => {
                 println!(
                     "Task 1: {}",
-                    count_toboggan_trees(toboggan_map.clone(), SlopeTraversal { right: 3, down: 1 })
+                    count_toboggan_trees(&toboggan_map, SlopeTraversal { right: 3, down: 1 })
                 );
 
                 let mut task2_result = 1;
                 for ruleset in rule_list {
-                    task2_result *= count_toboggan_trees(toboggan_map.clone(), ruleset);
+                    task2_result *= count_toboggan_trees(&toboggan_map, ruleset);
                 }
                 println!("Task 2: {}", task2_result);
             }

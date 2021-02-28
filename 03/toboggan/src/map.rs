@@ -82,11 +82,12 @@ impl MapRow {
     }
 }
 
-impl IntoIterator for Map {
-    type Item = MapRow;
-    type IntoIter = std::vec::IntoIter<Self::Item>;
+
+impl<'a> IntoIterator for &'a Map {
+    type Item = &'a MapRow;
+    type IntoIter = std::slice::Iter<'a, MapRow>;
 
     fn into_iter(self) -> Self::IntoIter {
-        self.0.into_iter()
+        self.0.iter()
     }
 }
