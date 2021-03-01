@@ -42,7 +42,7 @@ fn main() -> std::io::Result<()> {
             SlopeTraversal { right: 1, down: 2 },
         ];
 
-        match file_content.parse::<Map>() {
+        match file_content.parse() {
             Ok(toboggan_map) => {
                 println!(
                     "Task 1: {}",
