@@ -2,13 +2,13 @@ use std::error::Error;
 use std::fmt;
 use std::str::FromStr;
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct Map(Vec<MapRow>);
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct MapRow(Vec<bool>);
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub enum ParseMapRowError {
     InvalidCharacter(String),
 }
