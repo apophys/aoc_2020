@@ -28,10 +28,7 @@ class PWRecord:
     def is_valid(self):
         character_count = self.pw_character_count()
 
-        if self.range_min <= character_count and character_count <= self.range_max:
-            return True
-        else:
-            return False
+        return self.range_min <= character_count and character_count <= self.range_max
 
     def ruleset2(self):
         condition1 = self.password[self.range_min-1] == self.character
