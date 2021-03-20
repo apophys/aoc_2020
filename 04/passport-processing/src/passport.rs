@@ -23,11 +23,7 @@ impl Error for PassportParseError {}
 type PassportResult<T> = Result<T, PassportParseError>;
 
 fn valid_range(value: &str, min: i32, max: i32) -> bool {
-    if let Ok(value) = value.parse::<i32>() {
-        value >= min && value <= max
-    } else {
-        false
-    }
+    value.parse::<i32>().map_or(false, |v| v >= min && v <= max)
 }
 
 impl<'a> Passport<'a> {
