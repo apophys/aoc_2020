@@ -23,7 +23,9 @@ impl Error for PassportParseError {}
 type PassportResult<T> = Result<T, PassportParseError>;
 
 fn valid_range(value: &str, min: i32, max: i32) -> bool {
-    value.parse::<i32>().map_or(false, |value| value >= min && value <= max)
+    value
+        .parse::<i32>()
+        .map_or(false, |value| value >= min && value <= max)
 }
 
 impl<'a> Passport<'a> {
@@ -98,10 +100,9 @@ impl<'a> Passport<'a> {
         if let Some(hcl) = self.0.get("hcl") {
             match hcl.split_at(1) {
                 ("#", digits) => {
-                    let numeric_digits: Vec<_> =
-                        digits.chars().filter(|x| x.is_digit(16)).collect();
+                    let numeric_digits = digits.chars().filter(|x| x.is_digit(16)).count();
 
-                    numeric_digits.len() == 6
+                    numeric_digits == 6
                 }
                 (_, _) => false,
             }
@@ -120,9 +121,9 @@ impl<'a> Passport<'a> {
 
     fn is_valid_pid(&self) -> bool {
         if let Some(pid) = self.0.get("pid") {
-            let digits: Vec<_> = pid.chars().filter(|x| x.is_digit(10)).collect();
+            let digits = pid.chars().filter(|x| x.is_digit(10)).count();
 
-            pid.len() == 9 && digits.len() == 9
+            pid.len() == 9 && digits == 9
         } else {
             false
         }
