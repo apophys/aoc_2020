@@ -63,7 +63,7 @@ impl<'a> Passport<'a> {
     }
 
     fn valid_year_range(&self, key: &str, min: i32, max: i32) -> bool {
-        if let Some(ref field) = self.0.get(key) {
+        if let Some(field) = self.0.get(key) {
             valid_range(field, min, max)
         } else {
             false
