@@ -13,7 +13,7 @@ pub enum PassportParseError {
 impl fmt::Display for PassportParseError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::Invalid => write!(f, ""),
+            Self::Invalid => write!(f, "Couldn't parse the Passport data"),
         }
     }
 }
