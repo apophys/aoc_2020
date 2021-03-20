@@ -23,7 +23,7 @@ impl Error for PassportParseError {}
 type PassportResult<T> = Result<T, PassportParseError>;
 
 fn valid_range(value: &str, min: i32, max: i32) -> bool {
-    value.parse::<i32>().map_or(false, |v| v >= min && v <= max)
+    value.parse::<i32>().map_or(false, |value| value >= min && value <= max)
 }
 
 impl<'a> Passport<'a> {
@@ -46,7 +46,7 @@ impl<'a> Passport<'a> {
 
     pub fn is_strictly_valid(&self) -> bool {
         if self.is_valid() {
-            let fns = [
+            let validators = [
                 self.is_valid_byr(),
                 self.is_valid_iyr(),
                 self.is_valid_eyr(),
@@ -56,7 +56,7 @@ impl<'a> Passport<'a> {
                 self.is_valid_pid(),
             ];
 
-            fns.iter().all(|x| *x)
+            validators.iter().all(|x| *x)
         } else {
             false
         }
