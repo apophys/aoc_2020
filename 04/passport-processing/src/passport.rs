@@ -87,7 +87,7 @@ impl<'a> Passport<'a> {
     }
 
     fn is_valid_hgt(&self) -> bool {
-        if let Some(ref hgt) = self.0.get("hgt") {
+        if let Some(hgt) = self.0.get("hgt") {
             match hgt.split_at(hgt.len() - 2) {
                 (value, "cm") => valid_range(value, 150, 193),
                 (value, "in") => valid_range(value, 59, 76),
@@ -99,7 +99,7 @@ impl<'a> Passport<'a> {
     }
 
     fn is_valid_hcl(&self) -> bool {
-        if let Some(ref hcl) = self.0.get("hcl") {
+        if let Some(hcl) = self.0.get("hcl") {
             match hcl.split_at(1) {
                 ("#", digits) => {
                     let numeric_digits: Vec<_> =
