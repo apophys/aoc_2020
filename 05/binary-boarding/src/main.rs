@@ -18,16 +18,14 @@ fn main() -> std::io::Result<()> {
         let mut ids: Vec<_> = boarding_passes.iter().map(BoardingPass::seat_id).collect();
         ids.sort_unstable();
 
-        let mut index = 1;
-        while index < ids.len() {
-            let last = ids[index - 1];
-            let current = ids[index];
+        for i in 1..ids.len() {
+            let last = ids[i - 1];
+            let current = ids[i];
 
             if current - last == 2 {
                 println!("Gap is on {}", last + 1);
                 break;
             }
-            index += 1;
         }
     }
     Ok(())
