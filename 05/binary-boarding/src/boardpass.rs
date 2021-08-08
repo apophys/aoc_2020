@@ -15,11 +15,11 @@ impl<'a> BoardingPass<'a> {
 
 impl<'a> BoardingPass<'a> {
     pub fn row(&self) -> i32 {
-        resolve(self.row, 'F', 'B')
+        resolve(self.row, 'B')
     }
 
     pub fn column(&self) -> i32 {
-        resolve(self.column, 'L', 'R')
+        resolve(self.column, 'R')
     }
 
     pub fn seat_id(&self) -> i32 {
@@ -27,26 +27,13 @@ impl<'a> BoardingPass<'a> {
     }
 }
 
-fn resolve(vector: &str, lower: char, upper: char) -> i32 {
-    let (mut lower_value, mut upper_value) = (0, 2_i32.pow(vector.len() as u32) - 1);
+fn resolve(vector: &str, one: char) -> i32 {
+    let mut number = 0;
 
-    let mut last_char: char = '.';
-
-    for character in vector.chars() {
-        if character == lower {
-            upper_value = upper_value - (upper_value - lower_value) / 2 - 1;
+    for (i, character) in vector.chars().rev().enumerate() {
+        if character == one {
+            number += 2_i32.pow(i as u32);
         }
-        if character == upper {
-            lower_value = lower_value + (upper_value - lower_value) / 2 + 1;
-        }
-        last_char = character;
     }
-
-    if last_char == lower {
-        lower_value
-    } else if last_char == upper {
-        upper_value
-    } else {
-        unreachable!()
-    }
+    number
 }
