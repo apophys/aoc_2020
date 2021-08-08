@@ -1,3 +1,4 @@
+
 #[derive(Debug)]
 pub struct BoardingPass<'a> {
     row: &'a str,
@@ -14,11 +15,11 @@ impl<'a> BoardingPass<'a> {
 }
 
 impl<'a> BoardingPass<'a> {
-    pub fn row(&self) -> i32 {
+    fn row(&self) -> i32 {
         resolve(self.row, 'B')
     }
 
-    pub fn column(&self) -> i32 {
+    fn column(&self) -> i32 {
         resolve(self.column, 'R')
     }
 
@@ -28,12 +29,5 @@ impl<'a> BoardingPass<'a> {
 }
 
 fn resolve(vector: &str, one: char) -> i32 {
-    let mut number = 0;
-
-    for (i, character) in vector.chars().rev().enumerate() {
-        if character == one {
-            number += 2_i32.pow(i as u32);
-        }
-    }
-    number
+    vector.chars().rev().enumerate().map(|(i, c)| if c == one {2_i32.pow(i as u32)} else {0}).sum()
 }
